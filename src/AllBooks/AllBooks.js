@@ -6,12 +6,17 @@ import "./AllBooks.css";
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [cart, setCart] = useState([]);
-  console.log(cart);
 
   const handleAddToCart = (book) => {
     const newCart = [...cart, book];
     setCart(newCart);
   };
+
+  const handleChooseAgain = () => {
+    const changeCart = [];
+    setCart(changeCart);
+  };
+
   useEffect(() => {
     fetch("data.json")
       .then((res) => res.json())
@@ -29,8 +34,14 @@ const AllBooks = () => {
         {cart.map((item) => (
           <Cart key={item.id} item={item}></Cart>
         ))}
-        <button className="btn btn-success p-2 m-2">CHOOSE 1 FOR ME</button><br />
-        <button className="btn btn-warning p-2 m-2">CHOOSE AGAIN</button>
+        <button className="btn btn-success p-2 m-2">CHOOSE 1 FOR ME</button>
+        <br />
+        <button
+          onClick={() => handleChooseAgain()}
+          className="btn btn-warning p-2 m-2"
+        >
+          CHOOSE AGAIN
+        </button>
       </div>
     </div>
   );
