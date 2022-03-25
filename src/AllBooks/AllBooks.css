@@ -1,0 +1,7 @@
+.secondary{
+    width: 30%;
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid rgba(19, 139, 45, 0.432);
+    border-radius: 10px;
+}
