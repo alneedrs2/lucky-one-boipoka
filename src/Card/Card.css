@@ -2,7 +2,7 @@
   width: 70%;
   margin-top: 5%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
 }
 .card-box {
