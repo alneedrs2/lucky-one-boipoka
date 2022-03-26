@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import Cart from "../Cart/Cart";
+import ChooseItem from "../ChooseItem/ChooseItem";
+import ShowRandom from "../ShowRandom/ShowRandom";
 import "./AllBooks.css";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [carts, setCarts] = useState([]);
+  const [items, setItem] = useState([]);
 
   const handleAddToCart = (book) => {
-    const newCart = [...cart, book];
-    setCart(newCart);
+    const newCart = [...carts, book];
+    setCarts(newCart);
+  };
+
+  const chooseItem = () => {
+    let items = 0;
+    if (!items !== undefined) {
+      setItem(items);
+      const cart = Math.floor(Math.random() * 3 + 1);
+      items = carts[cart];
+      setItem(items);
+    }
   };
 
   const handleChooseAgain = () => {
     const changeCart = [];
-    setCart(changeCart);
+    setCarts(changeCart);
   };
 
   useEffect(() => {
@@ -23,7 +36,7 @@ const AllBooks = () => {
       .then((data) => setBooks(data));
   }, []);
   return (
-    <div className="d-flex">
+    <div className="book-container">
       <div className="section">
         {books.map((book) => (
           <Card key={book.id} book={book} handleAddToCart={handleAddToCart} />
@@ -31,10 +44,13 @@ const AllBooks = () => {
       </div>
       <div className="secondary">
         <h2 className="text-center">Selected Books</h2>
-        {cart.map((item) => (
-          <Cart key={item.id} item={item}></Cart>
+        {carts.map((item) => (
+          <Cart key={item.id} item={item} />
         ))}
-        <button className="btn btn-success p-2 m-2">CHOOSE 1 FOR ME</button>
+
+        <ShowRandom itm={items} chooseItem ={chooseItem}></ShowRandom>
+
+        <ChooseItem chooseItem ={chooseItem}></ChooseItem>
         <br />
         <button
           onClick={() => handleChooseAgain()}
